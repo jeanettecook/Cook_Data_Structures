@@ -17,4 +17,4 @@ void DLList<T>::push_front(const T& val) {
     list_size++;
 }
 
-// todo make pring and text 
+// todo make print and text 

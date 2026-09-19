@@ -25,6 +25,7 @@ void SLList::push_front(int val) {
     head = new SLLNode(val, head);
 
     list_size++;
+
     if(size () == 1){
         tail = head;
     }
@@ -43,25 +44,11 @@ std::cout << " }";
 }
 
 void SLList::push_back(int val) {
-   // if (empty()) {
-// head = new SLLNode(val);
-// }
-// else {
-// SLLNode* cur = head;
-// // Find the last node in the list
-// while (cur->next) {
-// cur = cur->next;
-// }
-// cur->next = new SLLNode (val);
-// }
-if (empty()) {
-push_front(val);
-return;
-}
-tail->next = new SLLNode(val); // Add the new node at the end
-tail = tail->next; // Update the tail
-// Increment the list size
-list_size++;
+    //need to create a new node
+    SLLNode * newNode = 
+    
+    
+   
 }
    
 
