@@ -13,6 +13,8 @@ public:
 
 private:
     std::string infix;
+    bool isOperand(char);
+    bool isOperator(char);
 
 };
 
