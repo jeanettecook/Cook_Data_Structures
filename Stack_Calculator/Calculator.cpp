@@ -19,7 +19,7 @@ bool Calculator::isOperand(char op){
 }
 
 bool Calculator::isOperator(char op){
-    if(op == '+'){
+    if(op == '+' || op == '-'|| op == '*'|| op == '/' || op == '^'){
         return true;
     }
     else{
@@ -34,6 +34,9 @@ std::string Calculator::toPostfix() {
     std::string postfix;
     for (int i =0; i < infix.size(); i++){
         char current_char = infix[i];
+        if (current_char == ' '){
+            continue;
+        }
         if (isOperator(current_char)){
             stack_char.push(current_char);
         }
