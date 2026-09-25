@@ -154,7 +154,11 @@ std::string Calculator::toPostfix() {
     }
 
     // a valid expression leaves exactly one value
-    if (operand_count != 1){
+    if (operand_count > 1){
+        // numbers left over, like "5 7"
+        throw std::logic_error("Error: invalid number of operators");
+    }
+    if (operand_count < 1){
         throw std::logic_error("Error: invalid number of operands");
     }
 
