@@ -68,3 +68,10 @@ Node*  reverseList(Node* node){
 
     return new_head;
 }
+
+//print reversed list backwards 
+
+// void print list backwards
+
+
+Node 
