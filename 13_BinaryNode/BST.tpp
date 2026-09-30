@@ -11,7 +11,7 @@ BST<T>::BST() : root(nullptr){
 }
 
 template <typename T>
-BST<T>::empty() const{
+bool BST<T>::empty() const{
     return root == nullptr; //root will be equal to nullptr
 }
 
@@ -48,11 +48,11 @@ void BST<T>::insert(const T& val) {
 }
 
 template <typename T>
-bool BST<T>::bool contains(const T& val) const; {
+bool BST<T>::contains(const T& val) const{
 
-BTNode<T> cur * root; // start by making the current point to the root
+    BTNode<T> * cur = root; // start by making the current point to the root
 
-while (cur!=nullptr){
+while (cur){
     if(val == cur -> data){ // if you found the current data, then it is true
         return true;
     }
@@ -64,6 +64,24 @@ while (cur!=nullptr){
     }
 }
 return false;
-    
+
+template<typename T>
+const BTNode<T>* BST<T>::search(const BTNode<T>* node, const T& val){
+    //Base case
+
+    if (!node || node -> data == val){
+
+    }
+    else if(val < node-> data){ 
+        return search(node -> left); // got left
+    }
+    else{
+        return search (node -> right, val);
+    }
 }
+template<typename T>
+const BTNode<T>* BST<T>::search(const T& val){
+search(val);
+}
+#endif
 
