@@ -96,7 +96,7 @@ const BTNode<T>* parent = nullptr;
 const BTNode<T>*  current = root;
 
 while(current !=nullptr){
-    if(val == current -> value){
+    if(val == current -> data){
          return parent;
         }
 
@@ -109,6 +109,21 @@ while(current !=nullptr){
     }
 }
 return parent;
+}
+
+template<typename T> 
+void BST<T>::preorder(const BTNode<T>* node){
+    if (node == nullptr){
+        return;
+    }
+    std::cout<< node -> data << " ";
+    preorder(node -> left);
+    preorder(node -> right);    
+}
+template< typename T>
+void BST<T>::preorder() const{
+    preorder(root);
+    std::cout<< "\n";
 }
 #endif
 

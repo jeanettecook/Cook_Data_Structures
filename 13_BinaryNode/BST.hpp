@@ -15,11 +15,15 @@ public:
     const BTNode<T>* search(const T& val);
     //TODO
     const BTNode<T>* search_parent(const T& val);
+    
+    void preorder() const;
+    
 private: 
 BTNode<T>* root; //points to the top
 
 const BTNode<T>* search(const BTNode<T>* node, const T& val);
 
+const BTNode<T> * preorder(const BTNode<T>* node) const;
 
 
 

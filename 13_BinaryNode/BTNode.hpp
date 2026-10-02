@@ -19,6 +19,7 @@ bool hasOnlyOneChild() const{
 bool hasTwoChildren() const{
     return right && left;  // does not need parenthesis because it is not checking two things
 }
+
 T data;
 BTNode<T>* left;
 BTNode<T>* right;
