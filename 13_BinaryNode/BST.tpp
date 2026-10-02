@@ -64,24 +64,51 @@ while (cur){
     }
 }
 return false;
+}
 
-template<typename T>
+template <typename T>
 const BTNode<T>* BST<T>::search(const BTNode<T>* node, const T& val){
-    //Base case
+    //Base case: fell off the tree, or found it
 
     if (!node || node -> data == val){
+        return node;
 
     }
-    else if(val < node-> data){ 
-        return search(node -> left); // got left
+    if(val < node-> data){ 
+        return search(node -> left, val); // go left
     }
     else{
         return search (node -> right, val);
     }
 }
-template<typename T>
+template <typename T>
 const BTNode<T>* BST<T>::search(const T& val){
-search(val);
+    return search(root,val);
+}
+
+template <typename T>
+const BTNode<T>* BST<T>::search_parent(const T& val){
+   if (root == nullptr){
+    return nullptr;
+   }
+
+const BTNode<T>* parent = nullptr;
+const BTNode<T>*  current = root;
+
+while(current !=nullptr){
+    if(val == current -> value){
+         return parent;
+        }
+
+    parent = current; //needs to remember this node before moving down
+
+    if (val < current -> data){ // then search the tree
+    current = current -> left;
+    } else{
+    current = current -> right;
+    }
+}
+return parent;
 }
 #endif
 
