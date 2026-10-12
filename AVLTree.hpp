@@ -44,7 +44,7 @@ private:
     int getHeight(const AVLNode<T>* node) const;
     int getBalance(const AVLNode<T>* node) const;
     void updateHeight(AVLNode<T>* node);
-    void balance(AVLNode<T>*& node);
+    void rebalance(AVLNode<T>*& node);
 
     // Rotations
     void rotateLeft(AVLNode<T>*& node);

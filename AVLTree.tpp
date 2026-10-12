@@ -139,6 +139,11 @@ void AVLTree<T>::rotateRight(AVLNode<T>*& node) {
     node->left = left_kid->right;
     left_kid->right = node;
 
+    //update the height;
+    updateHeight(node);
+    updateHeight(left_kid);
+
+
     node = left_kid;
 }
 
@@ -153,6 +158,11 @@ void AVLTree<T>::rotateLeft(AVLNode<T>*& node) {
     node->right = right_kid->left;
     right_kid->left = node;
 
+
+    //update the heights
+
+    updateHeight(node);
+    updateHeight(right_kid);
     node = right_kid;
 }
 
@@ -182,19 +192,27 @@ void AVLTree<T>::rotateRightLeft(AVLNode<T>*& node) {
 
 template <typename T>
 int AVLTree<T>::getHeight(const AVLNode<T>* node) const {
-    // TODO: Return the stored height of a node
-    throw std::logic_error("TODO: getHeight");
-}
+    return (node) ? node -> height : 0; 
+
+    }
 
 template <typename T>
 int AVLTree<T>::getBalance(const AVLNode<T>* node) const {
-    // TODO: Calculate the balance factor
-    throw std::logic_error("TODO: getBalance");
+
+    if (!node){
+        return 0;
+    }
+    return getHeight(node-> left) - getHeight(node -> right);
 }
 
 template <typename T>
 void AVLTree<T>::updateHeight(AVLNode<T>* node) {
-    // TODO: Update the node's height
+    if(!node){
+        return;
+    }
+    int height_left = getHeight(node -> left);
+    int height_right = getHeight(node -> right);
+    node -> height = (height_left > height_right) ? height_left +1 : height_right +1 ;
 }
 
 // ==================================================
@@ -202,8 +220,25 @@ void AVLTree<T>::updateHeight(AVLNode<T>* node) {
 // ==================================================
 
 template <typename T>
-void AVLTree<T>::balance(AVLNode<T>*& node) {
-    // TODO: Restore AVL balance using rotations
+void AVLTree<T>::rebalance(AVLNode<T>*& node) {
+    // TODO: Restore AVL balance using rotations // double rotations
+    if(!node){
+        return;
+    }
+    int bf = getBalance(node);
+    //LEFT HEAVY
+    if (bf > 1){
+        if(getBalance(node -> left) < -1){ // checks if the left side is right heavy
+            rotateLeft(node -> left);
+        }
+        rotateRight(node);
+    }
+    if (bf < -1){
+        if (getBalance(node -> right) > 1){
+            rotateRight(node -> right);
+        }
+        rotateLeft(node);
+    }
 }
 
 // ==================================================
@@ -213,12 +248,26 @@ void AVLTree<T>::balance(AVLNode<T>*& node) {
 template <typename T>
 void AVLTree<T>::insert(const T& val) {
     // TODO: Call recursive insert
+    insert(val, root);
 }
 
 template <typename T>
-void AVLTree<T>::insert(
-    const T& val, AVLNode<T>*& node) {
+void AVLTree<T>::insert(const T& val, AVLNode<T>*& node) {
+if(!node){
+    node = new AVLNode<T> (val);
+    return;
+}
+if (val < node -> data){
+    insert(val, node -> left);
+}
+else{
+    insert(val, node -> right);
+}
+//update the height
+updateHeight(node);
 
+//update the balance
+rebalance(node);
     // TODO: Implement recursive AVL insertion
 }
 
