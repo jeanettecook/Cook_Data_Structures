@@ -228,13 +228,13 @@ void AVLTree<T>::rebalance(AVLNode<T>*& node) {
     int bf = getBalance(node);
     //LEFT HEAVY
     if (bf > 1){
-        if(getBalance(node -> left) < -1){ // checks if the left side is right heavy
+        if(getBalance(node -> left) < 0){ // checks if the left side is right heavy
             rotateLeft(node -> left);
         }
         rotateRight(node);
     }
     if (bf < -1){
-        if (getBalance(node -> right) > 1){
+        if (getBalance(node -> right) > 0){
             rotateRight(node -> right);
         }
         rotateLeft(node);
