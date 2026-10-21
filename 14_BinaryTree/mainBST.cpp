@@ -1,34 +1,27 @@
-// Create BST, insert nodes, check contain method
-
 #include "BST.hpp"
 #include <string>
 #include <iostream>
 
+
 int main(void) {
-    BST<std::string> tree;
-
-    tree.insert("hello");
-    tree.insert("apple");
-    tree.insert("zoo");
-    tree.insert("carrot");
-    tree.insert("laptop");
-    tree.insert("car");
-    tree.insert("pen");
-
-    tree.remove("car");
-    tree.remove("apple");
+    BST<int> tree;
+    tree.insert(30);
+    tree.insert(20);
+    tree.insert(10);
     tree.print();
-    /*std::cout << "Has apple " << tree.contains("apple") << std::endl;
-    std::cout << "Has cat " << tree.contains("cat") << std::endl;
+    tree.rotateRight(tree.root);
+    tree.print();
+    tree.insert(40);
+    tree.insert(50);
+    tree.insert(60);
+    tree.print();
+    tree.rotateLeft(tree.root);
+    tree.print();
 
-    auto node = tree.search("zoo");
-    if (node) {
-        std::cout << node->data << std::endl;
-    }
+    // Create the unbalanced tree from the slides
 
-    tree.inorder();
-    
-    return 0;
-    */
+    // Test rotate leftright
+
+    // Test rotate rightleft
+
 }
-

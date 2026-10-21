@@ -199,7 +199,7 @@ void BST<T>::print(const std::string& prefix, const BTNode<T>* node, bool isRigh
     }
 
     // Print the value of the node
-    std::cout << node->data << std::endl;
+    std::cout << node->data << "," << getBalance(node) <<std::endl;
 
     // Go to the next level of the tree
     print(prefix + "   ", node->right, true);
@@ -236,7 +236,7 @@ void BST<T>::remove(const T& val){
         deleteNodeWithOneChild(node, parent);
     }
     else {
-        deleteNodeWithTwoChildren(node, parent);
+        deleteNodeWithTwoChildren(node);
     }
 }
 template <typename T>
@@ -260,4 +260,70 @@ void BST<T>::deleteNodeWithTwoChildren(BTNode<T>* node){
     else {
         deleteNodeWithOneChild(min_right, min_right_parent);
     }
+}
+
+template <typename T>
+int BST<T>::height( const BTNode<T>* node) const{
+    if (!node){
+        return 0;
+    }
+    int left_height = 1 + height(node -> left);
+    int right_height = 1 + height(node -> right);
+
+    return (left_height > right_height) ?  left_height : right_height;
+
+}
+template <typename T>
+int BST<T>::getBalance(const BTNode<T>* node) const{
+    if (!node){
+        return 0;
+    }
+    return height(node->left) - height(node -> right);
+
+}
+template <typename T>
+void BST<T>::rotateRight(BTNode<T>*& node){
+    if(!node ||! node -> left){
+        return;
+    }
+    BTNode<T>* left_kid = node -> left;
+    // left node needs to start pointing to the right
+    node -> left = left_kid -> right;
+    left_kid -> right = node;
+
+    // change the root
+    node = left_kid;
+
+}
+
+template <typename T>
+void BST<T>::rotateLeft(BTNode<T>*& node){
+    if(!node || node -> right || node -> right -> right){
+    }
+
+    BTNode<T>* right_kid  = node -> right;
+    node -> right = right_kid -> left;
+    right_kid -> left = node; 
+
+    // change the root
+
+    node = right_kid;   
+}
+
+template <typename T>
+void BST<T>::rotateLeftRight(BTNode<T>*& node){
+    if (!node ||!node -> left || !node-> left -> right){
+        return;
+    }
+    rotateLeft(node -> left);
+    rotateRight(node);
+}
+
+template <typename T>
+void BST<T>::rotateRightLeft(BTNode<T>*& node){
+    if (!node || !node -> right || !node -> right -> left){
+        return;
+    }
+    rotateRight(node -> right);
+    rotateLeft(node);
 }

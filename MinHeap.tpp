@@ -23,10 +23,25 @@ void MinHeap<T>::insert(const T& val){
 
 //TO DO implement three methods (Return -1 if the index doesn't exist) 
 template <typename T>
-int getParent(int index) const;
-
+int MinHeap<T>::getParent(int index) const{
+    if (index <= 0){
+        return -1;
+    }
+    return index = (index - 1) / 2; 
+}
 template <typename T>
-int getLeftChild(int index) const;
+int MinHeap<T>::getLeftChild(int index) const{
 
+if (index < 0){
+    return -1;
+}
+return (2 * index) + 1;
+}
 template <typename T>
-int getRightChild(int index) const;
+int MinHeap<T>::getRightChild(int index) const{
+if (index < 0){
+    return -1;
+}
+return (2 * index) + 2;
+
+}
