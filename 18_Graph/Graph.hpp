@@ -16,11 +16,17 @@ public:
 
     int getDegree(const T& vertex) const;
     bool hasEdge(const T& val);
+
+    //graph traversals
+    void BFS(const T& start) const;
+    void DFS(const T& start) const;
+    void DFS(const T& start) const;
 private:
     std::vector<T> vertices;
     std::vector<std::vector<int>> adjacency_list;
 
     int searchVertexIndex(const T& value) const;
+    void DFSExplore(int index, std::vector<bool>& visited);
 };
 
 #include "Graph.tpp"   // templates need their definitions visible to main

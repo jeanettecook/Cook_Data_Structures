@@ -1,4 +1,6 @@
 #include "Graph.hpp"
+#include <iostream>
+#include <queue>
 
 template <typename T>
 int Graph<T>::searchVertexIndex(const T& value) const {
@@ -93,4 +95,87 @@ bool hasEdge(const T& v1, const T& v2) const{
     int i_v1 = searchVertexIndex(v1);
     //find indices of both vertices (return false if not found)
     //search adjancency_list for first(second) index
+}
+
+template <typename T> 
+void Graph<T>::BFS (const T& start) const{
+    int start_index = searchVertexIndex(start);
+    
+    if(start_index == -1){
+        std::cout <<"BFS: incorrect start vertex\n";
+
+    }
+}
+
+//create a queue and the vector of discovered vertices
+
+std::queue<int> q; 
+std::vector<bool> discovered(vertices.size(), false);
+
+//add the start vertex into the queue
+
+q.push(start_index);
+//mark start index discovered
+discovered[start_index] = true;
+
+while(q!empty()){
+    //get the front value from the queue
+   int current_index = q.front(); 
+   q.pop();
+   //discover neighbors and add non discovered in the queue
+
+   for (int neighbor : adjancency_list[current_index]){
+    if (!discovered)
+   }
+   std::vector<bool> visited(vertices.size(), false);
+   DFSExplore(index, visited);
+}
+
+template <typename T> 
+void Graph<T>::DFSExplore(int index, std::vector<bool>& visited) const{
+    visited[index] = true;
+
+    if (print){
+        std::cout << vertices [index] << " "
+    }
+    std::cout<< vertices[index] << " ";
+
+    //go through visitors 
+    //if not visited call DFSExplore for that vertex
+    for (int neighbor : adjancency_list[index]){
+        if(!visited[neighbor]){
+            DFSExplore(neighbor, visited, print);
+        }
+    }
+}
+template <typename T>
+bool Graph<T>::isConnected() const{
+    if (vertices.empty()){
+        return true;
+    }
+    std::vector<bool> visited(vertices.size(), false);
+
+    //perform DFS
+    DFSExplore(0, visited, false);
+
+    for (bool v; visted){
+        if (!v){
+            return false;
+        }
+    }
+    return true;
+}
+
+//fix
+std::cout<< "isConnected" << friends.isConnected()<< std::endl;
+
+//fix
+friends.insertEdge("Rachel", "Phoebe", "")
+
+template <typename T> 
+void Graph<T>::shortestPath(const T& start, const T& end) const {
+    int start_vertex = searchVertexIndex
+
+    std::queue<int> q;
+    std::queue<
 }

@@ -1,5 +1,17 @@
+#include "HashMap.hpp"
+#include <string>
+
+int main(){
 //create a hash table 
-// insert 5 records
+HashMap <std::string> map;
+
+map.insert(8, "a");
+map.insert(15, "b");
+map.insert(22, "c");
+
+map.print();
 
 
-//print the content
+return 0;
+
+}
