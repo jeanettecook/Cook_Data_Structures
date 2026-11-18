@@ -1,37 +1,55 @@
 #include "Graph.hpp"
+#include <iostream>
 #include <string>
+int main() {
+Graph<std::string> cities;
+cities.insertVertex("Lakeland");
+cities.insertVertex("Orlando");
+cities.insertVertex("Tampa");
+cities.insertVertex("Miami");
+cities.insertVertex("Naples");
+cities.insertVertex("KeyWest");
+cities.insertEdge("Lakeland", "Orlando", 50);
+cities.insertEdge("Lakeland", "Miami", 350);
+cities.insertEdge("Lakeland", "Tampa", 40);
+cities.insertEdge("Orlando", "Miami", 200);
+cities.insertEdge("Naples", "Miami", 150);
+cities.insertEdge("Tampa", "Miami", 500);
+cities.insertEdge("Tampa", "Naples", 185);
+// Check connectivity and unreachable paths
+bool disconnected = !cities.isConnected() &&
+cities.shortestPathByEdges("Lakeland", "KeyWest") == -1;
+cities.insertEdge("Naples", "KeyWest", 170);
+bool connected = cities.isConnected();
+if (!disconnected || !connected) {
+std::cout << "Check your graph implementation.\n";
+return 0;
+}
+// Generate the attendance code
+std::string code;
+code += static_cast<char>('0' + cities.getDegree("Miami"));
+code += static_cast<char>(
+'0' + cities.shortestPathByEdges("Lakeland", "KeyWest")
++ cities.shortestPathByEdges("Lakeland", "Naples")
+);
+code += static_cast<char>(
+'A' + cities.getDegree("Tampa")
++ cities.shortestPathByEdges("Orlando", "Naples")
+);
+code += static_cast<char>(
+'A' + cities.getDegree("Miami")
++ cities.shortestPathByEdges("Lakeland", "Naples")
+);
+code += static_cast<char>(
+'0' + cities.shortestPathByEdges("Lakeland", "KeyWest")
++ connected
+);
+std::cout << "Attendance code: " << code << '\n';
+return 0;
 
-int main(void) {
-    Graph<std::string> friends;
 
-    // insert vertices
-    friends.insertVertex("Orlando");
-    friends.insertVertex("Miami");
-    friends.insertVertex("Lakeland");
-    friends.insertVertex("Naples");
-    friends.insertVertex("Tampa");
 
-    // create friendships (weight defaults to 1)
-    friends.insertEdge("Orlando", "Miami");
-    friends.insertEdge("Orlando", "Lakeland");
-    friends.insertEdge("Lakeland", "Miami");
-    friends.insertEdge("Naples", "Miami");
-    friends.insertEdge("Naples", "Miami");   // duplicate, gets ignored
-    friends.insertEdge("Tampa", "Naples");
-    friends.insertEdge("Tampa", "Miami");
 
-    // print the graph
-    friends.print();
-
-    std::cout << "BFS from Orlando: ";
-    friends.BFS("Orlando");
-    std::cout << "DFS from Orlando: ";
-    friends.DFS("Orlando");
-
-    std::cout << "Degree of Miami: " << friends.getDegree("Miami") << std::endl;
-    std::cout << "Tampa-Naples edge? " << std::boolalpha
-              << friends.hasEdge("Tampa", "Naples") << std::endl;
-    std::cout << "Orlando to Tampa: " << friends.shortestPath("Orlando", "Tampa") << std::endl;
-
-    return 0;
+//test shortest path by distance
+//maybe need to fix something in the min heap
 }

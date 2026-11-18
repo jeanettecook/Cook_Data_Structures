@@ -21,7 +21,7 @@ public:
     void BFS(const T& start) const;
     void DFS(const T& start) const;
 
-    //int getWeightEdge((const T& v1, const T& v2)) const;
+    int getWeightEdge(const T& v1, const T& v2) const;
 
 private:
     struct Edge {
@@ -29,6 +29,8 @@ private:
         int weight;
         Edge(int n, int w) : neighbor(n), weight(w) {}
     };
+
+    bool operator <(const T& val)
 
     std::vector<T> vertices;
     std::vector<std::vector<Edge>> adjacency_list;
